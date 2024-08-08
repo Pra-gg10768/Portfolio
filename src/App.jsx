@@ -1,17 +1,18 @@
-import React, { useRef } from 'react';
-import { Contact, Experience, Hero, Portfolio } from './components';
+import { useState } from 'react';
+import { Contact, Experience, Hero, Portfolio, About } from "./components";
 import './App.css';
 
 function App() {
-  const experienceRef = useRef(null);
-
   return (
-    <div>
-      <Hero experienceRef={experienceRef} />
-      <Experience ref={experienceRef} />
-      <Portfolio />
-      <Contact />
-    </div>
+    <>
+      <div>
+          <Hero />
+          <section id="about"><About /></section>
+          <section id="experience"><Experience /></section>
+          <section id="portfolio"><Portfolio /></section>
+          <section id="contact"><Contact /></section>
+      </div>
+    </>
   );
 }
 
