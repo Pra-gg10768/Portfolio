@@ -17,7 +17,7 @@ function About() {
                         My journey in the tech world started with a fascination for how things work, leading me to explore various programming languages and technologies. Today, I specialize in developing applications using the MERN stack and continuously strive to learn and grow in this ever-evolving field.
                     </p>
                     <div className="button-container">
-                        <a className="btn-glitch-fill" href="/Resume.pdf">
+                        <a className="btn-glitch-fill" href="/Pragnyan Resume.pdf">
                             <span className="text">// Get CV</span><span className="text-decoration">_</span><span className="decoration">&rArr;</span>
                         </a>
                     </div>
