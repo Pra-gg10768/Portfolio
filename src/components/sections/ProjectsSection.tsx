@@ -38,7 +38,8 @@ const ProjectsSection: React.FC = () => {
       description: 'Predictive healthcare analytics system for early disease detection',
       image: 'https://images.pexels.com/photos/4226119/pexels-photo-4226119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
       tech: ['Python', 'Scikit-learn', 'TensorFlow', 'React', 'Node.js', 'MongoDB'],
-      details: 'CareCast is an innovative healthcare application that leverages AI and machine learning to predict potential health risks and diseases based on user-provided data. The system analyzes various health parameters, medical history, lifestyle factors, and demographic information to generate personalized health risk assessments.\n\nThe machine learning backend employs an ensemble of models including random forests, gradient boosting, and neural networks to achieve high accuracy in risk prediction across multiple disease categories.'
+      details: 'CareCast is an innovative healthcare application that leverages AI and machine learning to predict potential health risks and diseases based on user-provided data. The system analyzes various health parameters, medical history, lifestyle factors, and demographic information to generate personalized health risk assessments.\n\nThe machine learning backend employs an ensemble of models including random forests, gradient boosting, and neural networks to achieve high accuracy in risk prediction across multiple disease categories.',
+      link: 'https://care-cast-predictions.vercel.app/'
     },
     {
       id: 4,
