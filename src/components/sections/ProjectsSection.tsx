@@ -28,7 +28,7 @@ const ProjectsSection: React.FC = () => {
       id: 2,
       title: 'AI-Based Smart Traffic Management System',
       description: 'Intelligent traffic monitoring and optimization using computer vision',
-      image: '/public/images/traffic.jpeg',
+      image: './public/images/traffic.jpeg',
       tech: ['Python', 'PyTorch', 'YOLO', 'Raspberry Pi', 'IoT'],
       details: 'This AI-powered traffic management system utilizes computer vision and IoT technologies to create a smarter, more efficient traffic flow in urban environments. The system analyzes real-time video feeds from traffic cameras to detect vehicles, pedestrians, and road conditions.\n\nUsing a combination of YOLO (You Only Look Once) object detection and custom-trained models, the system can accurately identify traffic density, predict congestion, and dynamically adjust traffic signal timings to optimize flow. The hardware implementation uses Raspberry Pi devices at traffic intersections, connected to a central server that coordinates the network-wide response.'
     },
@@ -44,7 +44,7 @@ const ProjectsSection: React.FC = () => {
       id: 4,
       title: 'Real Time Queue Detection and Management System',
       description: 'A real-time system for detecting, managing and optimizing queues.',
-      image: '/public/images/queue.jpeg',
+      image: './public/images/queue.jpeg',
       tech: ['Python', 'Scikit-learn','YOLO', 'React', 'Node.js', 'MongoDB','Pandas','Seaborn'],
       details: 'This system utilizes the YOLO (You Only Look Once) object detection model to identify and count individuals in real-time camera feeds, optimizing queue management in public spaces and minimizing wait times. The solution features an intuitive web interface that displays real-time data on queue lengths and wait times, enabling authorities and service providers to make informed decisions.\n\n Designed to address challenges like occlusion and varying lighting conditions, the system ensures accurate detection and scalable performance across environments such as transportation hubs and government offices, enhancing operational efficiency even in high-traffic areas.',
       link: 'https://ijsrem.com/download/real-time-queue-detection-and-management-system-using-yolo-object-detection/'
