@@ -1,4 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --cursor-color: 59, 130, 246;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-gradient-to-br from-gray-950 via-gray-900 to-dark-800 text-white font-sans overflow-x-hidden;
+}
+
+.glass {
+  @apply bg-white/10 backdrop-blur-lg backdrop-filter border border-white/20 shadow-glass;
+}
+
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+.heading-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400;
+}
+
+.custom-cursor {
+  position: fixed;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: exclusion;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--cursor-color), 0.3);
+  transition: width 0.3s, height 0.3s, background 0.3s;
+}
+
+.custom-cursor::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgb(var(--cursor-color));
+  transition: width 0.3s, height 0.3s;
+}
+
+.custom-cursor.hovered {
+  width: 48px;
+  height: 48px;
+  background: rgba(var(--cursor-color), 0.1);
+}
+
+.custom-cursor.hovered::after {
+  width: 12px;
+  height: 12px;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.gradient-border {
+  position: relative;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(to right, theme('colors.primary.400'), theme('colors.accent.400'));
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.animate-draw {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: draw 2s ease-in-out forwards;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
