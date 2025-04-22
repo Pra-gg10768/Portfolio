@@ -93,7 +93,7 @@ const About: React.FC = () => {
                 <div className="mb-4">
                   <h4 className="text-lg font-medium text-primary-400">Computer Science</h4>
                   <p className="text-gray-400">Bachelor's Degree</p>
-                  <p className="text-sm text-gray-500">2020 - 2024</p>
+                  <p className="text-sm text-gray-500">2021 - 2025</p>
                 </div>
                 <p className="text-gray-300">
                   Focused on AI, Machine Learning, and Software Development with multiple research projects.
