@@ -108,13 +108,13 @@ const About: React.FC = () => {
                   Feel free to connect with me on professional networks:
                 </p>
                 <div className="flex gap-4">
-                  <a href="https://github.com/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-dark-700 hover:bg-dark-600 transition-colors">
+                  <a href="https://github.com/Pra-gg10768" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-dark-700 hover:bg-dark-600 transition-colors">
                     <Github size={20} className="text-white" />
                   </a>
-                  <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-dark-700 hover:bg-dark-600 transition-colors">
+                  <a href="https://linkedin.com/Pragnyan" target="_blank" rel="noopener noreferrer" className="p-3 rounded-full bg-dark-700 hover:bg-dark-600 transition-colors">
                     <Linkedin size={20} className="text-white" />
                   </a>
-                  <a href="mailto:contact@pragnyansatapathy.com" className="p-3 rounded-full bg-dark-700 hover:bg-dark-600 transition-colors">
+                  <a href="mailto:pragnyansatapathy@gmail.com" className="p-3 rounded-full bg-dark-700 hover:bg-dark-600 transition-colors">
                     <MessageSquare size={20} className="text-white" />
                   </a>
                 </div>
