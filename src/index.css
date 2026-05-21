@@ -261,8 +261,8 @@ body::before {
 
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(68px, 11.2vw, 196px);
-  line-height: 0.82;
+  font-size: clamp(54px, 8.4vw, 148px);
+  line-height: 0.88;
   letter-spacing: -0.065em;
   font-weight: 900;
   color: var(--fg);
@@ -1810,8 +1810,8 @@ html[data-theme='light'] .theme-toggle-thumb {
   }
 
   .hero-title {
-    font-size: clamp(46px, 17vw, 92px);
-    line-height: 0.86;
+    font-size: clamp(40px, 14vw, 72px);
+    line-height: 0.9;
     letter-spacing: -0.055em;
     margin-bottom: 28px;
   }

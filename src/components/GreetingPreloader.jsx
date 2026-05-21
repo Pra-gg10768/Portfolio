@@ -13,26 +13,28 @@ const words = [
 ];
 
 const EASE = [0.76, 0, 0.24, 1];
+const WORD_SLOT_MS = 950;
 
 export default function GreetingPreloader({ onDone }) {
   const [index, setIndex] = useState(0);
   const doneRef = useRef(false);
 
   useEffect(() => {
-    const isLastGreeting = index === words.length - 1;
-    const timer = setTimeout(() => {
-      if (isLastGreeting) {
-        if (doneRef.current) return;
-        doneRef.current = true;
-        if (onDone) onDone();
-        return;
-      }
-
+    const interval = window.setInterval(() => {
       setIndex((prev) => Math.min(prev + 1, words.length - 1));
-    }, isLastGreeting ? 900 : index === 0 ? 1050 : 560);
+    }, WORD_SLOT_MS);
 
-    return () => clearTimeout(timer);
-  }, [index, onDone]);
+    const doneTimer = window.setTimeout(() => {
+      if (doneRef.current) return;
+      doneRef.current = true;
+      if (onDone) onDone();
+    }, words.length * WORD_SLOT_MS + 450);
+
+    return () => {
+      window.clearInterval(interval);
+      window.clearTimeout(doneTimer);
+    };
+  }, [onDone]);
 
   return (
     <motion.div
@@ -70,7 +72,7 @@ export default function GreetingPreloader({ onDone }) {
           initial={{ opacity: 0, y: 38 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -38 }}
-          transition={{ duration: 0.52, ease: EASE }}
+          transition={{ duration: 0.36, ease: EASE }}
           style={{
             position: 'absolute',
             fontSize: 'clamp(48px, 10vw, 80px)',
