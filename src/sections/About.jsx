@@ -1,75 +1,91 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Github } from 'lucide-react';
+import { Github, Radar, Route, ScanFace, ShieldCheck, Sprout } from 'lucide-react';
 
-const timeline = [
-  { year: '2025', event: 'Built vehicle telemetry visualizations from GPS and OBD-II driving data' },
-  { year: '2024', event: 'Deepened computer vision and security research through lab-driven project work' },
-  { year: '2023', event: 'Winner - Smart India Hackathon' },
-  { year: '2021', event: 'Started formal computer science training and software foundations' },
+const EASE = [0.16, 1, 0.3, 1];
+
+const chapters = [
+  {
+    label: 'Origin',
+    title: 'A try-on app made perception feel tangible.',
+    text: 'Facial geometry was the first hook: a camera, a face, and software that understood enough structure to feel intelligent.',
+    icon: ScanFace,
+  },
+  {
+    label: 'Constraint',
+    title: 'A farmer platform exposed the limit of rules.',
+    text: 'Market prices and crop recommendations worked, but visual crop health needed a model that could actually inspect the world.',
+    icon: Sprout,
+  },
+  {
+    label: 'Research',
+    title: 'The projects started orbiting trust.',
+    text: 'Deepfakes, intrusion traffic, and crowded scenes all ask whether a model is learning the phenomenon or a convenient shortcut.',
+    icon: ShieldCheck,
+  },
+  {
+    label: 'Delivery',
+    title: 'Telemetry made the work more physical.',
+    text: 'GPS and OBD-II traces moved the work into pipelines, visual debugging, and interfaces for messy real signals.',
+    icon: Route,
+  },
 ];
 
-const strengths = [
-  { label: 'ML modeling', value: 0.88 },
-  { label: 'Computer vision', value: 0.84 },
-  { label: 'Product systems', value: 0.78 },
-  { label: 'Client delivery', value: 0.86 },
+const radarSignals = [
+  { label: 'Question', detail: 'What is the real signal?' },
+  { label: 'Extract', detail: 'Turn raw inputs into traces.' },
+  { label: 'Stress test', detail: 'Check what breaks off-domain.' },
+  { label: 'Explain', detail: 'Make the decision inspectable.' },
+  { label: 'Ship', detail: 'Wrap it in a usable surface.' },
 ];
 
 export default function About() {
   const ref = useRef(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
-  const cardYOne = useTransform(scrollYProgress, [0, 1], [42, -58]);
-  const cardYTwo = useTransform(scrollYProgress, [0, 1], [-24, 52]);
-  const cardRotate = useTransform(scrollYProgress, [0, 1], [-4, 5]);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
+  const sweep = useTransform(scrollYProgress, [0, 1], ['0deg', '360deg']);
+  const glow = useTransform(scrollYProgress, [0, 0.5, 1], [0.45, 0.9, 0.55]);
 
   return (
-    <section id="about" ref={ref} className="about-motion-section">
-      <div className="about-motion-grid">
-        <div className="about-motion-copy">
+    <section id="about" ref={ref} className="about-polished-section">
+      <div className="about-polished-sticky">
+        <motion.div
+          className="about-radar-panel"
+          initial={{ opacity: 0, x: -34 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.8, ease: EASE }}
+        >
+          <div className="about-radar" aria-hidden="true">
+            <motion.span className="about-radar-sweep" style={{ rotate: sweep, opacity: glow }} />
+            <Radar size={38} />
+            {radarSignals.map((signal, index) => (
+              <div key={signal.label} className={`about-radar-chip about-radar-chip-${index + 1}`}>
+                <strong>{signal.label}</strong>
+                <span>{signal.detail}</span>
+              </div>
+            ))}
+          </div>
+          <div className="about-radar-caption">
+            <span className="label">Working loop</span>
+            <strong>Question the shortcut, extract the signal, then make the result inspectable.</strong>
+          </div>
+        </motion.div>
+
+        <div className="about-story-column">
           <span className="label">About me</span>
-          <h2 className="display">I am Pragg, an AI/ML engineer shaped by research problems and product constraints.</h2>
+          <h2 className="display">I care less about the model name than the signal it is allowed to trust.</h2>
           <p>
-            My interest started with a simple question: how does software learn to interpret the real world? That curiosity
-            moved from foundations in computer science into farmer-facing digital tools, network intrusion detection,
-            rPPG-based deepfake detection, queue monitoring, and telemetry visualization. I keep the freelance side of my
-            profile visible because I like work that has to survive users, deadlines, and messy data.
+            My work sits between computer vision, security, and applied ML. The common thread is evaluation:
+            if a system works only because of artifacts, dataset quirks, or clean inputs, it is not done yet.
           </p>
           <a className="about-github-link" href="https://github.com/Pra-gg10768" target="_blank" rel="noreferrer">
             <Github size={17} />
             @Pra-gg10768
           </a>
-        </div>
 
-        <div className="about-motion-stage">
-          <motion.div className="about-floating-card card-one" style={{ y: cardYOne, rotate: cardRotate }}>
-            <span>Current focus</span>
-            <strong>Vision, security, and useful AI products</strong>
-          </motion.div>
-          <motion.div className="about-floating-card card-two" style={{ y: cardYTwo }}>
-            <span>Research habit</span>
-            <strong>Prototype fast, validate honestly</strong>
-          </motion.div>
-
-          <div className="about-strength-panel">
-            <span className="label">Stack strength</span>
-            {strengths.map((item, index) => (
-              <Strength key={item.label} item={item} index={index} />
-            ))}
-          </div>
-
-          <div className="about-journey">
-            {timeline.map((item, index) => (
-              <motion.div
-                key={item.year}
-                initial={{ opacity: 0, x: 24 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
-              >
-                <span>{item.year}</span>
-                <p>{item.event}</p>
-              </motion.div>
+          <div className="about-story-list">
+            {chapters.map((chapter, index) => (
+              <StoryRow key={chapter.label} chapter={chapter} index={index} progress={scrollYProgress} />
             ))}
           </div>
         </div>
@@ -78,21 +94,22 @@ export default function About() {
   );
 }
 
-function Strength({ item, index }) {
+function StoryRow({ chapter, index, progress }) {
+  const start = 0.12 + index * 0.16;
+  const opacity = useTransform(progress, [start - 0.08, start + 0.04, start + 0.24], [0.38, 1, 0.72]);
+  const x = useTransform(progress, [start - 0.08, start + 0.04], [28, 0]);
+  const Icon = chapter.icon;
+
   return (
-    <div className="about-strength-row">
+    <motion.article className="about-story-row" style={{ opacity, x }}>
+      <div className="about-story-row-icon">
+        <Icon size={17} />
+      </div>
       <div>
-        <span>{item.label}</span>
-        <em>{Math.round(item.value * 100)}%</em>
+        <span>{chapter.label}</span>
+        <h3>{chapter.title}</h3>
+        <p>{chapter.text}</p>
       </div>
-      <div className="about-strength-track">
-        <motion.span
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: item.value }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: index * 0.08 }}
-        />
-      </div>
-    </div>
+    </motion.article>
   );
 }

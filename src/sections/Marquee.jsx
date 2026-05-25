@@ -1,7 +1,12 @@
 const items = [
-  'Python', 'PyTorch', 'TensorFlow', 'YOLO', 'Transformers',
-  'OpenCV', 'Scikit-learn', 'Flask', 'Pandas', 'NumPy',
-  'Mapbox', 'Deck.gl', 'MongoDB', 'MySQL', 'Git',
+  'Smart India Hackathon winner',
+  'Computer vision research',
+  'Network intrusion detection',
+  'rPPG deepfake analysis',
+  'YOLO queue monitoring',
+  'GPS + OBD-II telemetry',
+  'Explainable ML with SHAP',
+  'Freelance-ready product systems',
 ];
 
 export default function Marquee() {

@@ -6,7 +6,7 @@ import { Skiper58NavLink } from './v1/TextRoll'
 
 const links = [
   { label: 'About', href: '#about' },
-  { label: 'Journey', href: '#journey' },
+  { label: 'Featured', href: '#featured' },
   { label: 'Skills', href: '#skills' },
   { label: 'Work', href: '#work' },
   { label: 'Contact', href: '#contact' },
@@ -61,7 +61,7 @@ export default function Nav() {
             <Skiper58NavLink key={l.label} href={l.href}>{l.label}</Skiper58NavLink>
           ))}
           <ThemeToggleButton />
-          <AnimatedLink href="mailto:pragnyansatapathy@gmail.com" variant="fill">
+          <AnimatedLink href="#contact" variant="fill">
             Hire me
           </AnimatedLink>
         </div>

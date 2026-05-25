@@ -4,18 +4,20 @@ import Cursor from './components/Cursor';
 import Nav from './components/Nav';
 import GreetingPreloader from './components/GreetingPreloader';
 import Hero from './sections/Hero';
-import Narrative from './sections/Narrative';
-import PathScroll from './components/PathScroll';
 import Marquee from './sections/Marquee';
 import Work from './sections/Work';
 import About from './sections/About';
+import FeaturedProject from './sections/FeaturedProject';
 import Skills from './sections/Skills';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
 
 export default function App() {
-  const [loaded, setLoaded] = useState(false);
-  const handlePreloaderDone = useCallback(() => setLoaded(true), []);
+  const [loaded, setLoaded] = useState(() => window.sessionStorage.getItem('preloader-seen') === 'true');
+  const handlePreloaderDone = useCallback(() => {
+    window.sessionStorage.setItem('preloader-seen', 'true');
+    setLoaded(true);
+  }, []);
 
   useEffect(() => {
     const saved = window.localStorage.getItem('portfolio-theme');
@@ -40,8 +42,7 @@ export default function App() {
             <main>
               <Hero />
               <About />
-              <Narrative />
-              <PathScroll />
+              <FeaturedProject />
               <Skills />
               <Marquee />
               <Work />

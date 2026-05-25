@@ -1,133 +1,136 @@
 import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Eye, LineChart, Network, Wheat } from 'lucide-react';
 
 const projects = [
   {
     num: '01',
-    title: 'Physio-Aware Deepfake Detection',
-    desc: 'A domain-aware detector using multi-ROI rPPG signals from facial video, focused on physiological consistency and honest cross-domain evaluation.',
-    tags: ['PyTorch', 'Computer Vision', 'rPPG'],
-    year: '2024-25',
-    color: '#c8f064',
+    title: 'ML-Based Network Intrusion Detection',
+    problem: 'Detect malicious network behavior without hiding the decision path.',
+    evidence: 'CICIDS2017 preprocessing, ensemble comparison, SHAP explanations.',
+    tags: ['Scikit-learn', 'XGBoost', 'SHAP'],
+    year: '2023-24',
+    icon: Network,
+    href: 'https://github.com/Pra-gg10768',
   },
   {
     num: '02',
-    title: 'ML-Based Network Intrusion Detection',
-    desc: 'A CICIDS2017 intrusion detection pipeline with careful feature handling, ensemble models, and SHAP explanations for security decisions.',
-    tags: ['Scikit-learn', 'XGBoost', 'SHAP'],
-    year: '2023-24',
-    color: '#64c8f0',
+    title: 'Real-Time Queue Detection System',
+    problem: 'Turn crowded camera frames into density signals and alerts.',
+    evidence: 'YOLO detection, occlusion handling, thresholds, Flask monitoring.',
+    tags: ['YOLO', 'OpenCV', 'Flask'],
+    year: '2025',
+    icon: Eye,
+    href: 'https://github.com/Pra-gg10768',
   },
   {
     num: '03',
-    title: 'Real-Time Queue Detection System',
-    desc: 'A YOLO and Flask monitoring system for queue density, occlusion-aware detection, and operational alerts in crowded environments.',
-    tags: ['YOLO', 'OpenCV', 'Flask'],
+    title: 'Trip Telemetry Visualization',
+    problem: 'Make raw GPS and OBD-II traces inspectable.',
+    evidence: 'Route playback, stop detection, speed profiling, spatial analysis.',
+    tags: ['Mapbox', 'Deck.gl', 'Data Eng'],
     year: '2025',
-    color: '#f064c8',
+    icon: LineChart,
+    href: 'https://github.com/Pra-gg10768',
   },
   {
     num: '04',
-    title: 'Trip Telemetry Visualization',
-    desc: 'A GPS and OBD-II workflow for route playback, stop detection, speed profiling, and spatial analysis from raw driving data.',
-    tags: ['Mapbox', 'Deck.gl', 'Data Eng'],
-    year: '2025',
-    color: '#f0c864',
-  },
-  {
-    num: '05',
     title: 'Farmer Digital Advisory Platform',
-    desc: 'An early product system for agricultural data, market prices, and crop recommendations that shaped my move from rule-based logic toward visual and intelligent decision support.',
+    problem: 'Support crop and market decisions with useful product logic.',
+    evidence: 'Advisory flows, market-aware recommendations, early product system.',
     tags: ['Product', 'Data', 'Advisory'],
     year: 'Early work',
-    color: '#c8f064',
+    icon: Wheat,
+    href: 'https://github.com/Pra-gg10768',
   },
 ];
 
 export default function Work() {
   const ref = useRef(null);
+  const [active, setActive] = useState(0);
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] });
-  const x = useTransform(scrollYProgress, [0, 1], ['0%', '-64%']);
+  const line = useTransform(scrollYProgress, [0.08, 0.88], ['0%', '100%']);
 
   return (
-    <section ref={ref} id="work" className="work-scroll-section">
-      <div className="work-scroll-sticky">
-        <div className="work-scroll-header">
+    <section ref={ref} id="work" className="work-polished-section">
+      <div className="work-polished-sticky">
+        <div className="work-polished-header">
           <div>
-            <span className="label">Selected work</span>
-            <h2 className="display">Research projects built with product discipline.</h2>
+            <span className="label">Research project index</span>
+            <h2 className="display">A compact map of the work beyond the flagship project.</h2>
           </div>
           <p>
-            A mix of research systems and freelance-ready builds: problem, implementation, evaluation, and delivery.
+            The cards are intentionally quieter: each project gets a problem, evidence, stack, and proof exit. No filler,
+            no fake complexity.
           </p>
         </div>
 
-        <div className="work-progress-dots">
-          {projects.map((project, index) => (
-            <ProgressDot key={project.num} index={index} progress={scrollYProgress} />
-          ))}
-        </div>
-
-        <div className="work-viewport">
-          <motion.div className="work-track" style={{ x }}>
+        <div className="work-polished-body">
+          <div className="work-index-list">
+            <div className="work-index-line" aria-hidden="true">
+              <motion.span style={{ height: line }} />
+            </div>
             {projects.map((project, index) => (
-              <ProjectCard key={project.num} project={project} index={index} progress={scrollYProgress} />
+              <ProjectRow
+                key={project.num}
+                project={project}
+                index={index}
+                active={active === index}
+                onActivate={() => setActive(index)}
+                progress={scrollYProgress}
+              />
             ))}
-          </motion.div>
+          </div>
+
+          <motion.aside
+            className="work-context-panel"
+            key={projects[active].title}
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35, ease: EASE }}
+          >
+            <span>{projects[active].num}</span>
+            <h3>{projects[active].title}</h3>
+            <p>{projects[active].evidence}</p>
+            <div>
+              {projects[active].tags.map((tag) => (
+                <em key={tag}>{tag}</em>
+              ))}
+            </div>
+          </motion.aside>
         </div>
       </div>
     </section>
   );
 }
 
-function ProgressDot({ index, progress }) {
-  const total = projects.length - 1;
-  const point = index / total;
-  const scale = useTransform(progress, [point - 0.12, point, point + 0.12], [0.75, 1.45, 0.75]);
-  const opacity = useTransform(progress, [point - 0.12, point, point + 0.12], [0.36, 1, 0.36]);
+const EASE = [0.16, 1, 0.3, 1];
 
-  return <motion.span style={{ scale, opacity }} />;
-}
-
-function ProjectCard({ project, index, progress }) {
-  const [hovered, setHovered] = useState(false);
-  const total = projects.length - 1;
-  const point = index / total;
-  const opacity = useTransform(progress, [point - 0.22, point, point + 0.22], [0.55, 1, 0.55]);
-  const y = useTransform(progress, [point - 0.18, point, point + 0.18], [34, 0, -24]);
+function ProjectRow({ project, index, active, onActivate, progress }) {
+  const start = 0.1 + index * 0.16;
+  const opacity = useTransform(progress, [start - 0.08, start + 0.06, start + 0.24], [0.42, 1, 0.72]);
+  const y = useTransform(progress, [start - 0.08, start + 0.06], [28, 0]);
+  const Icon = project.icon;
 
   return (
     <motion.article
-      className="work-horizontal-card"
-      style={{ '--project-color': project.color, opacity, y }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      whileHover={{ y: -10 }}
-      transition={{ duration: 0.25 }}
+      className={active ? 'work-index-row active' : 'work-index-row'}
+      style={{ opacity, y }}
+      onMouseEnter={onActivate}
+      onFocus={onActivate}
     >
-      <div className="work-card-index">
-        <span>{project.num}</span>
-        <em>{project.year}</em>
+      <div className="work-index-num">{project.num}</div>
+      <div className="work-index-main">
+        <div>
+          <Icon size={18} />
+          <span>{project.year}</span>
+        </div>
+        <h3>{project.title}</h3>
+        <p>{project.problem}</p>
       </div>
-      <h3>{project.title}</h3>
-      <p>{project.desc}</p>
-      <div className="work-card-tags">
-        {project.tags.map((tag) => (
-          <span key={tag}>{tag}</span>
-        ))}
-      </div>
-      <motion.a
-        href="#contact"
-        className="work-card-arrow"
-        aria-label={`Discuss ${project.title}`}
-        animate={{
-          backgroundColor: hovered ? project.color : 'transparent',
-          color: hovered ? '#0a0a0a' : 'var(--fg)',
-        }}
-      >
-        <ArrowUpRight size={20} />
-      </motion.a>
+      <a href={project.href} target="_blank" rel="noreferrer" aria-label={`View ${project.title}`}>
+        <ArrowUpRight size={18} />
+      </a>
     </motion.article>
   );
 }
